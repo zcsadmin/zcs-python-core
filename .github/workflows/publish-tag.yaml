@@ -1,0 +1,57 @@
+name: Publish application tag
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish tagged package
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: projects/51853309262/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+          service_account: github-actions-sa@ai-accounting-405809.iam.gserviceaccount.com
+          access_token_lifetime: 600s
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+          python -m pip install wheel
+          python -m pip install twine
+          python -m pip install keyring keyrings.google-artifactregistry-auth
+
+      - name: Build wheel
+        working-directory: ./app
+        run: python -m build
+        
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+
+      - name: Upload to Artifact Registry
+        working-directory: ./app
+        run: |
+          gcloud config set artifacts/repository python
+          gcloud config set artifacts/location europe-west1
+          gcloud artifacts print-settings python > ~/.pypirc
+          python -m twine upload --repository python dist/*
