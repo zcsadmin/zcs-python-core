@@ -1,8 +1,7 @@
 import json
 import logging
-#from google.cloud import logging as gcloud_logging
 
-class JsonFormatter(logging.Formatter):
+class CloudJsonFormatter(logging.Formatter):
     def format(self, record):
         log_record = {
             "severity": record.levelname,
@@ -11,67 +10,70 @@ class JsonFormatter(logging.Formatter):
         }
         return json.dumps(log_record)
 
+class ConsoleCustomFormatter(logging.Formatter):
 
-
-
-
-class ZcsLogger:
-
-    def __init__(self, environment: str, log_level: str = logging.INFO):
-        self.__logger = logging
-        self.__log_level = log_level
+    def __init__(self, verbose = False):
+        super().__init__()
         
-        if environment == "local":
-            # TODO verificare che questa Google Cloud Logging serva
-            # Configura il client di Google Cloud Logging
-            #gcloud_logging_client = gcloud_logging.Client()
-            #gcloud_logging_client.setup_logging()
+        set_grey = "\x1b[38;20m"
+        set_green = "\x1b[32;20m"
+        set_yellow = "\x1b[33;20m"
+        set_red = "\x1b[31;20m"
+        set_bold_red = "\x1b[31;1m"
+        reset = "\x1b[0m"
 
-            # Configura il logger root
-            root_logger = self.__logger.getLogger()
-            root_logger.setLevel(self.__log_level)
-            self.clear_handlers(root_logger)
+        # https://docs.python.org/3/library/logging.html#logrecord-attributes
+        base_format = "%(levelname)-8s %(asctime)s - %(message)s"
+        if verbose:
+            base_format += " (%(filename)s:%(lineno)d)"
 
-            # Configura i logger di Uvicorn
+        self.FORMATTERS = {
+            logging.DEBUG: logging.Formatter(set_grey + base_format + reset),
+            logging.INFO: logging.Formatter(set_green + base_format + reset),
+            logging.WARNING: logging.Formatter(set_yellow + base_format + reset),
+            logging.ERROR: logging.Formatter(set_red + base_format + reset),
+            logging.CRITICAL: logging.Formatter(set_bold_red + base_format + reset)
+        }
 
-            
-            uvicorn_logger = self.__logger.getLogger("uvicorn")
-            uvicorn_logger.setLevel(self.__log_level)
-            self.clear_handlers(uvicorn_logger)
+    def format(self, record):
+        formatter = self.FORMATTERS.get(record.levelno)
+        return formatter.format(record)
 
-            #uvicorn_error_logger = self.__logger.getLogger("uvicorn.error")
-            # uvicorn_error_logger.setLevel(self.__logger.ERROR)
-            #self.clear_handlers(uvicorn_error_logger)
+class ZcsLogging:
 
-            uvicorn_access_logger = self.__logger.getLogger("uvicorn.access")
-            # uvicorn_access_logger.setLevel(self.__log_level)
-            self.clear_handlers(uvicorn_access_logger)
+    def __init__(self, enable_cloud_logging: bool = True, log_level: str = logging.INFO):
 
-            # Crea un handler personalizzato per Google Cloud Logging
-            handler = self.__logger.StreamHandler()
-            formatter = JsonFormatter()
-            handler.setFormatter(formatter)
+        self.__log_level = log_level
 
-            # Aggiungi l'handler a tutti i logger
-            #loggers = [root_logger, uvicorn_logger, uvicorn_access_logger, uvicorn_error_logger]
-            loggers = [root_logger, uvicorn_logger, uvicorn_access_logger]
-            for logger in loggers:
-                logger.addHandler(handler)
+        # Create a custom logger for ZCS application
+        self.__logger = logging.getLogger('zcsapp')
 
+        # Create a custom handler for logging
+        custom_handler = logging.StreamHandler()
+        if enable_cloud_logging:
+            custom_handler.setFormatter(CloudJsonFormatter())
         else:
-            log_handlers = []
-            log_handlers.append(logging.StreamHandler())
+            custom_handler.setFormatter(ConsoleCustomFormatter())
 
-            # logging config
-            logging.basicConfig(
-                level=self.__log_level,
-                format="%(asctime)s [%(levelname)s] %(message)s",
-                handlers=log_handlers
-            )
+        # Apply custom handler to all configured loggers
+        configured_loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+        for p_logger in configured_loggers:
+            p_logger.setLevel(self.__log_level)
+            if len(p_logger.handlers) == 0:
+                continue
+            p_logger.handlers = [ custom_handler ]
+        
+        zcs_handler = logging.StreamHandler()
+        if enable_cloud_logging:
+            zcs_handler.setFormatter(CloudJsonFormatter())
+        else:
+            zcs_handler.setFormatter(ConsoleCustomFormatter(True))
 
-    def clear_handlers(self, logger):
-        while logger.handlers:
-            logger.handlers.pop()
+        # Set log level and handler for the root logger
+        logging.basicConfig(
+            level=self.__log_level,
+            handlers=[ zcs_handler ]
+        )
 
     def get_logger(self):
         return self.__logger

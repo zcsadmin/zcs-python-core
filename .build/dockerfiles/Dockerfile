@@ -13,6 +13,8 @@ ARG DOCKER_GROUP=bob
 USER 0
 RUN /fix-perm.sh
 
+RUN pip install --upgrade pip
+
 # Run as normal user
 USER ${DOCKER_USER}
 
@@ -26,6 +28,12 @@ FROM zcscompany/python:3.11-dist AS dist
 
 ARG DOCKER_USER=bob
 ARG DOCKER_GROUP=bob
+
+USER 0
+RUN pip install --upgrade pip
+
+# Run as normal user
+USER ${DOCKER_USER}
 
 # Copy application requirement file
 COPY --chown=$DOCKER_USER:$DOCKER_GROUP app/requirements.txt .

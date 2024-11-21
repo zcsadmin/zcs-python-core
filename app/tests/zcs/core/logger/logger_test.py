@@ -1,10 +1,9 @@
 import pytest
-from zcs.core.logger import ZcsLogger
+from zcs.core.logger import ZcsLogging
 
 
 def test_zcs_logger():
 
-    with pytest.raises(Exception) as exc_info:
-        ZcsLogger()
+    zcsLogging = ZcsLogging(enable_cloud_logging=False)
 
-    assert exc_info.type == TypeError
+    assert zcsLogging is not None

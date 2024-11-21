@@ -1,1 +1,1 @@
-from .logger import ZcsLogger as ZcsLogger
+from .logger import ZcsLogging as ZcsLogging
