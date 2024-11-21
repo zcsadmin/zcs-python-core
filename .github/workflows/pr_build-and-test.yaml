@@ -1,0 +1,27 @@
+name: PR - Build and test library
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  docker-build-and-test:
+    name: Build dist docker image and run tests
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - id: checkout
+        name: Checkout project
+        uses: actions/checkout@v4
+
+      - id: build
+        name: Build dist docker image
+        run: docker build -f .build/dockerfiles/Dockerfile -t dist .
+    
+      - id: test
+        name: Run python tests on dist image
+        run: docker run --rm dist pytest
