@@ -1,12 +1,52 @@
 import json
 import logging
 
+from zcs.core.exception import ZcsException 
+
+old_factory = logging.getLogRecordFactory()
+
+def record_factory(*args, **kwargs):
+    record = old_factory(*args, **kwargs)
+    
+    record.error_code = None
+    if args[4] and isinstance(args[4], ZcsException):
+        record.error_code = args[4].get_error_code()
+
+    # Set original exception value if needed
+    record.original_exception = None
+    if args[6] is not None:
+        for arg in args[6]:
+            if isinstance(arg, Exception):
+                record.original_exception = arg
+                if isinstance(arg, ZcsException):
+                    record.error_code = arg.get_error_code()
+    
+    return record
+
+logging.setLogRecordFactory(record_factory)
+
 class CloudJsonFormatter(logging.Formatter):
     def format(self, record):
+
+        message = record.getMessage()
+        if record.exc_info and record.original_exception:
+            message = str(record.original_exception)
+
         log_record = {
             "severity": record.levelname,
-            "message": record.getMessage(),
-            "time": self.formatTime(record, self.datefmt)
+            "message": message,
+            "time": self.formatTime(record, self.datefmt),
+            "logging.googleapis.com/sourceLocation": {
+                "file": record.filename,
+                "line": record.lineno,
+                "function": record.funcName,
+                "pathname": record.pathname,
+                "traceback": self.formatException(record.exc_info) if record.exc_info else ""
+            },
+            "logging.googleapis.com/labels": {
+                "logger_name": record.name,
+                "error_code": record.error_code,
+            },
         }
         return json.dumps(log_record)
 
@@ -29,7 +69,7 @@ class ConsoleCustomFormatter(logging.Formatter):
 
         self.FORMATTERS = {
             logging.DEBUG: logging.Formatter(set_grey + base_format + reset),
-            logging.INFO: logging.Formatter(set_green + base_format + reset),
+            logging.INFO: logging.Formatter(base_format),
             logging.WARNING: logging.Formatter(set_yellow + base_format + reset),
             logging.ERROR: logging.Formatter(set_red + base_format + reset),
             logging.CRITICAL: logging.Formatter(set_bold_red + base_format + reset)
