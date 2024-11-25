@@ -2,8 +2,6 @@
 
 This repository contains the core python library developed by Madness Lab Team at Zucchetti Centro Sistemi.
 
-The library provides a `Logger` allowing the user to receive logging messages from Uvicorn and send them to Google Cloud.
-
 ```text
 
 ░▒▓████████▓▒░░▒▓██████▓▒░ ░▒▓███████▓▒░                                             
@@ -56,11 +54,11 @@ Then add the library `zcs-python-core` to the same file.
 In your code, you can import and use the library like this:
 
 ```python
-from zcs.core.exception import ZCSException
+from zcs.core.exception import ZcsException
 ```
 
 ```python
-from zcs.core.logger import Logger
+from zcs.core.logger import ZcsLogging
 ```
 
 ## Local development
