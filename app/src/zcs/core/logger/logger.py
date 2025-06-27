@@ -1,13 +1,14 @@
 import json
 import logging
 
-from zcs.core.exception import ZcsException 
+from zcs.core.exception import ZcsException
 
 old_factory = logging.getLogRecordFactory()
 
+
 def record_factory(*args, **kwargs):
     record = old_factory(*args, **kwargs)
-    
+
     record.error_code = None
     if args[4] and isinstance(args[4], ZcsException):
         record.error_code = args[4].get_error_code()
@@ -20,10 +21,12 @@ def record_factory(*args, **kwargs):
                 record.original_exception = arg
                 if isinstance(arg, ZcsException):
                     record.error_code = arg.get_error_code()
-    
+
     return record
 
+
 logging.setLogRecordFactory(record_factory)
+
 
 class CloudJsonFormatter(logging.Formatter):
     def format(self, record):
@@ -50,13 +53,14 @@ class CloudJsonFormatter(logging.Formatter):
         }
         return json.dumps(log_record)
 
+
 class ConsoleCustomFormatter(logging.Formatter):
 
-    def __init__(self, verbose = False):
+    def __init__(self, verbose=False):
         super().__init__()
-        
+
         set_grey = "\x1b[38;20m"
-        set_green = "\x1b[32;20m"
+        # set_green = "\x1b[32;20m"
         set_yellow = "\x1b[33;20m"
         set_red = "\x1b[31;20m"
         set_bold_red = "\x1b[31;1m"
@@ -78,6 +82,7 @@ class ConsoleCustomFormatter(logging.Formatter):
     def format(self, record):
         formatter = self.FORMATTERS.get(record.levelno)
         return formatter.format(record)
+
 
 class ZcsLogging:
 
@@ -101,8 +106,8 @@ class ZcsLogging:
             p_logger.setLevel(self.__log_level)
             if len(p_logger.handlers) == 0:
                 continue
-            p_logger.handlers = [ custom_handler ]
-        
+            p_logger.handlers = [custom_handler]
+
         zcs_handler = logging.StreamHandler()
         if enable_cloud_logging:
             zcs_handler.setFormatter(CloudJsonFormatter())
@@ -112,7 +117,7 @@ class ZcsLogging:
         # Set log level and handler for the root logger
         logging.basicConfig(
             level=self.__log_level,
-            handlers=[ zcs_handler ]
+            handlers=[zcs_handler]
         )
 
     def get_logger(self):
