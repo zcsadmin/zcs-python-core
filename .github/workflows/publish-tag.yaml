@@ -28,6 +28,11 @@ jobs:
           service_account: github-actions-sa@ai-accounting-405809.iam.gserviceaccount.com
           access_token_lifetime: 600s
 
+      - name: Set application version
+        run: |
+            sed -i 's|version = "\(.*\)"|version = "${{ github.ref_name }}"|g' app/pyproject.toml && 
+            cat app/pyproject.toml
+
       - name: Setup Python
         uses: actions/setup-python@v3
 
