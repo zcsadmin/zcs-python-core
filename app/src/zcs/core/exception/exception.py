@@ -1,12 +1,16 @@
 import random
 import string
 import traceback
+from typing import Optional
+
 
 class ZcsException(Exception):
 
-    def __init__(self, user_message = "Unknown error.", error_source = "Unspecified", status_code = 500, internal_message = None):
+    def __init__(
+            self, user_message: str = "Unknown error.", error_source: str = "Unspecified",
+            status_code: int = 500, internal_message: Optional[str] = None):
         super().__init__(user_message)
-        
+
         self.__error_source = error_source
         self.__status_code = status_code
         self.__user_message = user_message
@@ -15,16 +19,16 @@ class ZcsException(Exception):
 
     def get_status_code(self):
         return self.__status_code
-    
+
     def get_error_source(self):
         return self.__error_source
-    
+
     def get_user_message(self):
         return self.__user_message
-    
+
     def get_internal_message(self):
         return self.__internal_message
-    
+
     def get_error_code(self):
         return self.__error_code
 
@@ -37,7 +41,6 @@ class ZcsException(Exception):
             'status_code': self.get_status_code(),
             'traceback': "".join(traceback.format_exception(self))
         }
-    
+
     def __str__(self):
         return f"{self.get_error_code()} - {self.get_error_source()} - {self.get_internal_message()} - {self.get_user_message()}"
-

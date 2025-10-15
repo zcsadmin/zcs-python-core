@@ -1,7 +1,10 @@
 import json
 import logging
+import time
+from logging import LogRecord
 
 from zcs.core.exception import ZcsException
+from zcs.core.session import request_context, RequestState
 
 old_factory = logging.getLogRecordFactory()
 
@@ -30,6 +33,9 @@ logging.setLogRecordFactory(record_factory)
 
 class CloudJsonFormatter(logging.Formatter):
     def format(self, record):
+
+        # FIXME
+        # log op_code, request_id and time deltas
 
         message = record.getMessage()
         if record.exc_info and record.original_exception:
@@ -79,8 +85,19 @@ class ConsoleCustomFormatter(logging.Formatter):
             logging.CRITICAL: logging.Formatter(set_bold_red + base_format + reset)
         }
 
-    def format(self, record):
+    def format(self, record: LogRecord) -> str:
         formatter = self.FORMATTERS.get(record.levelno)
+
+        # Retrieve request state from request context
+        request_state: RequestState = request_context.get()
+        if request_state:
+            time_ns = time.perf_counter_ns()
+            delta_ns = time_ns - request_state.getCheckpointNs()
+            total_ns = time_ns - request_state.getRequestStartNs()
+            request_state.setCheckpointNs(time_ns)
+            record.msg = "[OP_CODE:{}][REQ_ID:{}] {} ({:.2f}s delta - {:.2f}s total)".format(
+                request_state.getOpCode(), request_state.getRequestId(), record.msg, delta_ns / 1e9, total_ns / 1e9)
+
         return formatter.format(record)
 
 
