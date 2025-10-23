@@ -34,9 +34,6 @@ logging.setLogRecordFactory(record_factory)
 class CloudJsonFormatter(logging.Formatter):
     def format(self, record):
 
-        # FIXME
-        # log op_code, request_id and time deltas
-
         message = record.getMessage()
         if record.exc_info and record.original_exception:
             message = str(record.original_exception)
@@ -57,6 +54,19 @@ class CloudJsonFormatter(logging.Formatter):
                 "error_code": record.error_code,
             },
         }
+
+        # Retrieve request state from request context
+        request_state: RequestState = request_context.get()
+        if request_state:
+            time_ns = time.perf_counter_ns()
+            delta_ns = time_ns - request_state.getCheckpointNs()
+            total_ns = time_ns - request_state.getRequestStartNs()
+            request_state.setCheckpointNs(time_ns)
+            log_record["logging.googleapis.com/labels"]["op_code"] = request_state.getOpCode()
+            log_record["logging.googleapis.com/labels"]["request_id"] = request_state.getRequestId()
+            log_record["logging.googleapis.com/labels"]["delta_ns"] = delta_ns / 1e9
+            log_record["logging.googleapis.com/labels"]["total_ns"] = total_ns / 1e9
+
         return json.dumps(log_record)
 
 
