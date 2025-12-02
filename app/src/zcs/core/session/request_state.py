@@ -26,6 +26,13 @@ class RequestState():
         """
 
         return self.__auth_info
+    
+    def setAuthInfo(self, auth_info: AuthInfo):
+        """
+        Set authentication information.
+        """
+
+        self.__auth_info = auth_info
 
     def getOpCode(self) -> str:
         """
