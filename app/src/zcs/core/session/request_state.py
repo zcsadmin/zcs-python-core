@@ -2,6 +2,8 @@ import time
 import uuid
 from typing import Optional
 
+from zcs.core.session.auth_info import AuthInfo
+
 
 class RequestState():
 
@@ -9,12 +11,21 @@ class RequestState():
             self,
             request_id: Optional[str] = None,
             prefix: Optional[str] = None,
-            op_code: Optional[str] = None):
+            op_code: Optional[str] = None,
+            auth_info: Optional[AuthInfo] = None):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
         self.__request_start_ns = time.perf_counter_ns()
         self.__checkpoint_ns = self.__request_start_ns
+        self.__auth_info = auth_info
+
+    def getAuthInfo(self) -> Optional[AuthInfo]:
+        """
+        Get authentication information.
+        """
+
+        return self.__auth_info
 
     def getOpCode(self) -> str:
         """
