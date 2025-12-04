@@ -3,6 +3,7 @@ import uuid
 from typing import Optional
 
 from zcs.core.session.auth_info import AuthInfo
+from zcs.core.session.follia_module import FolliaModule
 
 
 class RequestState():
@@ -12,13 +13,29 @@ class RequestState():
             request_id: Optional[str] = None,
             prefix: Optional[str] = None,
             op_code: Optional[str] = None,
-            auth_info: Optional[AuthInfo] = None):
+            auth_info: Optional[AuthInfo] = None,
+            follia_module: Optional[FolliaModule] = None):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
         self.__request_start_ns = time.perf_counter_ns()
         self.__checkpoint_ns = self.__request_start_ns
         self.__auth_info = auth_info
+        self.__follia_module = follia_module
+
+    def getFolliaModule(self) -> Optional[FolliaModule]:
+        """
+        Get Follia module information.
+        """
+
+        return self.__follia_module
+    
+    def setFolliaModule(self, follia_module: FolliaModule):
+        """
+        Set Follia module information.
+        """
+
+        self.__follia_module = follia_module
 
     def getAuthInfo(self) -> Optional[AuthInfo]:
         """
