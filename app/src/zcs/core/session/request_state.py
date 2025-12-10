@@ -16,7 +16,8 @@ class RequestState():
             op_code: Optional[str] = None,
             auth_info: Optional[AuthInfo] = None,
             follia_module: Optional[FolliaModule] = None,
-            qa_info: Optional[QaInfo] = None):
+            qa_info: Optional[QaInfo] = None,
+            doc_type: Optional[str] = None):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
@@ -25,6 +26,21 @@ class RequestState():
         self.__auth_info = auth_info
         self.__follia_module = follia_module
         self.__qa_info = qa_info
+        self.__doc_type = doc_type
+    
+    def getDocType(self) -> Optional[str]:
+        """
+        Get document type.
+        """
+
+        return self.__doc_type
+    
+    def setDocType(self, doc_type: str):
+        """
+        Set document type.
+        """
+
+        self.__doc_type = doc_type
 
     def getQaInfo(self) -> Optional[QaInfo]:
         """
