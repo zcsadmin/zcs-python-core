@@ -4,6 +4,7 @@ from typing import Optional
 
 from zcs.core.session.auth_info import AuthInfo
 from zcs.core.session.follia_module import FolliaModule
+from zcs.core.session.qa_info import QaInfo
 
 
 class RequestState():
@@ -14,7 +15,8 @@ class RequestState():
             prefix: Optional[str] = None,
             op_code: Optional[str] = None,
             auth_info: Optional[AuthInfo] = None,
-            follia_module: Optional[FolliaModule] = None):
+            follia_module: Optional[FolliaModule] = None,
+            qa_info: Optional[QaInfo] = None):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
@@ -22,6 +24,21 @@ class RequestState():
         self.__checkpoint_ns = self.__request_start_ns
         self.__auth_info = auth_info
         self.__follia_module = follia_module
+        self.__qa_info = qa_info
+
+    def getQaInfo(self) -> Optional[QaInfo]:
+        """
+        Get QA information.
+        """
+
+        return self.__qa_info
+
+    def setQaInfo(self, qa_info: QaInfo):
+        """
+        Set QA information.
+        """
+
+        self.__qa_info = qa_info
 
     def getFolliaModule(self) -> Optional[FolliaModule]:
         """
