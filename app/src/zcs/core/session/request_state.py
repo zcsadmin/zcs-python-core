@@ -17,7 +17,9 @@ class RequestState():
             auth_info: Optional[AuthInfo] = None,
             follia_module: Optional[FolliaModule] = None,
             qa_info: Optional[QaInfo] = None,
-            doc_type: Optional[str] = None):
+            doc_type: Optional[str] = None,
+            size: Optional[int] = None,
+            total_pages: Optional[int] = None,):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
@@ -27,6 +29,37 @@ class RequestState():
         self.__follia_module = follia_module
         self.__qa_info = qa_info
         self.__doc_type = doc_type
+        self.__size = size
+        self.__total_pages = total_pages
+
+
+    def setTotalPages(self, total_pages: int):
+        """
+        Set total pages.
+        """
+
+        self.__total_pages = total_pages
+
+    def getTotalPages(self) -> Optional[int]:
+        """
+        Get total pages.
+        """
+
+        return self.__total_pages
+
+    def getSize(self) -> Optional[int]:
+        """
+        Get size.
+        """
+
+        return self.__size
+
+    def setSize(self, size: int):
+        """
+        Set size.
+        """
+
+        self.__size = size
     
     def getDocType(self) -> Optional[str]:
         """
