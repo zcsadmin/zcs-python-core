@@ -19,7 +19,9 @@ class RequestState():
             qa_info: Optional[QaInfo] = None,
             doc_type: Optional[str] = None,
             size: Optional[int] = None,
-            total_pages: Optional[int] = None,):
+            total_pages: Optional[int] = None,
+            job_id: Optional[str] = None,
+            file_id: Optional[str] = None):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
@@ -31,7 +33,37 @@ class RequestState():
         self.__doc_type = doc_type
         self.__size = size
         self.__total_pages = total_pages
+        self.__job_id = job_id
+        self.__file_id = file_id
 
+
+    def setFileId(self, file_id: str):
+        """
+        Set file id.
+        """
+
+        self.__file_id = file_id
+
+    def getFileId(self) -> Optional[str]:
+        """
+        Get file id.
+        """
+
+        return self.__file_id
+    
+    def setJobId(self, job_id: str):
+        """
+        Set job id.
+        """
+
+        self.__job_id = job_id
+
+    def getJobId(self) -> Optional[str]:
+        """
+        Get job id.
+        """
+
+        return self.__job_id
 
     def setTotalPages(self, total_pages: int):
         """
