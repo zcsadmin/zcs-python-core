@@ -21,7 +21,9 @@ class RequestState():
             size: Optional[int] = None,
             total_pages: Optional[int] = None,
             job_id: Optional[str] = None,
-            file_id: Optional[str] = None):
+            file_id: Optional[str] = None,
+            attempts: Optional[int] = 0
+            ):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
         self.__op_code = op_code if op_code else self.__request_id
@@ -35,7 +37,21 @@ class RequestState():
         self.__total_pages = total_pages
         self.__job_id = job_id
         self.__file_id = file_id
+        self.__attempts = attempts
 
+    def setAttempts(self, attempts: int):
+        """
+        Set number of attempts.
+        """
+
+        self.__attempts = attempts
+
+    def getAttempts(self) -> int:
+        """
+        Get number of attempts.
+        """
+
+        return self.__attempts
 
     def setFileId(self, file_id: str):
         """
