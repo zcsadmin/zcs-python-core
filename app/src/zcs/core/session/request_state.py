@@ -22,7 +22,8 @@ class RequestState():
             total_pages: Optional[int] = None,
             job_id: Optional[str] = None,
             file_id: Optional[str] = None,
-            attempts: Optional[int] = 0
+            attempts: Optional[int] = 0,
+            custom_data: Optional[dict] = None
             ):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
@@ -38,6 +39,21 @@ class RequestState():
         self.__job_id = job_id
         self.__file_id = file_id
         self.__attempts = attempts
+        self.__custom_data = custom_data if custom_data else {}
+    
+    def getCustomData(self) -> dict:
+        """
+        Get custom data dictionary.
+        """
+
+        return self.__custom_data
+    
+    def setCustomData(self, custom_data: dict):
+        """
+        Set custom data dictionary.
+        """
+
+        self.__custom_data = custom_data
 
     def setAttempts(self, attempts: int):
         """
