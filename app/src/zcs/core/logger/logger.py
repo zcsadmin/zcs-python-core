@@ -18,8 +18,9 @@ def record_factory(*args, **kwargs):
 
     # Set original exception value if needed
     record.original_exception = None
-    if args[6] is not None:
-        for arg in args[6]:
+    value = args[6] if len(args) > 6 else None
+    if isinstance(value, (list, tuple, set)):
+        for arg in value:
             if isinstance(arg, Exception):
                 record.original_exception = arg
                 if isinstance(arg, ZcsException):
