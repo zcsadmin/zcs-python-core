@@ -23,7 +23,8 @@ class RequestState():
             job_id: Optional[str] = None,
             file_id: Optional[str] = None,
             attempts: Optional[int] = 0,
-            custom_data: Optional[dict] = None
+            custom_data: Optional[dict] = None,
+            channel: Optional[str] = None,
             ):
 
         self.__request_id = request_id if request_id else RequestState.generate_op_code(prefix=prefix)
@@ -40,7 +41,22 @@ class RequestState():
         self.__file_id = file_id
         self.__attempts = attempts
         self.__custom_data = custom_data if custom_data else {}
+        self.__channel = channel
     
+    def getChannel(self) -> Optional[str]:
+        """
+        Get request channel.
+        """
+
+        return self.__channel
+    
+    def setChannel(self, channel: str):
+        """
+        Set request channel.
+        """
+
+        self.__channel = channel
+
     def getCustomData(self) -> dict:
         """
         Get custom data dictionary.
