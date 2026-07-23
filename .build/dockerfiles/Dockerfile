@@ -3,7 +3,7 @@
 #
 # Dev image used for local development
 #
-FROM zcscompany/python:3.11-dev AS dev
+FROM zcscompany/python:3.13-dev AS dev
 
 ARG FIX_UID
 ARG FIX_GID
@@ -24,7 +24,7 @@ USER ${DOCKER_USER}
 #
 # Image used for application distribution
 #
-FROM zcscompany/python:3.11-dist AS dist
+FROM zcscompany/python:3.13-dist AS dist
 
 ARG DOCKER_USER=bob
 ARG DOCKER_GROUP=bob
