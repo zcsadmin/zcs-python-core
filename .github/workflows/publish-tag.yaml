@@ -61,10 +61,10 @@ jobs:
           gcloud artifacts print-settings python > ~/.pypirc
           python -m twine upload --repository python dist/*
 
-      - name: Check if pre-release
-        id: check_prerelease
+      - id: check-prerelease
+        name: Check if pre-release
         run: |
-          if [[ "${{ github.ref_name }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+$ ]]; then
+          if [[ "${{ github.ref_name }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "prerelease=false" >> $GITHUB_OUTPUT
           else
             echo "prerelease=true" >> $GITHUB_OUTPUT
