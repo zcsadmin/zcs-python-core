@@ -71,7 +71,7 @@ class ZcsTelemetry:
     def is_telemetry_enabled(self) -> bool:
         return self._telemetry_initialized
 
-    def counter_create(self, name, unit, description):
+    def counter_create(self, name, unit, description, label_names=None):
         if not self._telemetry_initialized:
             self._logger.warning("Telemetry is not initialized - cannot create counter")
             return
@@ -89,7 +89,7 @@ class ZcsTelemetry:
             try:
                 from prometheus_client import Counter as PrometheusCounter
                 safe_name = name.replace(".", "_").replace("-", "_")
-                self._prometheus_counters[name] = PrometheusCounter(safe_name, description)
+                self._prometheus_counters[name] = PrometheusCounter(safe_name, description, label_names or [])
             except ImportError:
                 self._logger.warning("prometheus_client is not installed - Alloy Prometheus counter skipped")
 
