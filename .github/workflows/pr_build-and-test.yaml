@@ -16,7 +16,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - id: build
         name: Build dist docker image
