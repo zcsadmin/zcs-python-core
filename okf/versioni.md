@@ -4,8 +4,9 @@ title: "Storia delle versioni"
 description: "Tag di zcs-python-core dal 2025: data, cosa cambia nel codice, modifiche non retrocompatibili e vincoli noti dal codice."
 resource: https://github.com/zcsadmin/zcs-python-core/tags
 tags: [versioni, tag, release]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: git, resource: "git log e git diff tra i tag della repo, letti il 2026-11-10", title: "Storia dei tag" }
   - { id: rel, resource: "gh release list e gh api repos/zcsadmin/zcs-python-core/releases, 2026-11-10", title: "Release GitHub e stato pre-release" }

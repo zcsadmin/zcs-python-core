@@ -4,8 +4,9 @@ title: "Logger: ZcsLogging e filtro degli endpoint"
 description: "ZcsLogging, i due formatter (JSON per Cloud Logging e console) e EndpointFilter: parametri, formato dei log e campi del contesto aggiunti."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/logger/logger.py
 tags: [logger, cloud-logging, formatter, endpoint-filter]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: logger, resource: ../../app/src/zcs/core/logger/logger.py, title: "ZcsLogging e formatter", last_modified: 2026-04-03T07:58:22Z }
   - { id: filter, resource: ../../app/src/zcs/core/logger/endpoint_filter.py, title: "EndpointFilter", last_modified: 2025-06-27T08:46:03Z }

@@ -4,8 +4,9 @@ title: "Configurazione della telemetria"
 description: "Variabili d'ambiente di TelemetrySettings (solo nomi e predefiniti), file letto, campi non usati; il resto della libreria non legge variabili."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/settings/telemetry_settings.py
 tags: [configurazione, telemetria, variabili-ambiente]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: sett, resource: ../../app/src/zcs/core/settings/telemetry_settings.py, title: "TelemetrySettings", last_modified: 2026-05-12T08:23:34Z }
   - { id: tel, resource: ../../app/src/zcs/core/telemetry/zcs_telemetry.py, title: "Uso delle impostazioni", last_modified: 2026-07-23T09:06:44Z }
