@@ -61,6 +61,10 @@ from zcs.core.exception import ZcsException
 from zcs.core.logger import ZcsLogging
 ```
 
+## Documentation
+
+Technical documentation of the library (OKF bundle): see [okf/index.md](./okf/index.md).
+
 ## Local development
 
 See [Local Development](./docs/LOCAL_DEVELOPMENT.md).
