@@ -4,8 +4,9 @@ title: "Eccezioni: ZcsException"
 description: "ZcsException: parametri, codice di errore casuale, serializzazione con get_as_dict e legame con il logger."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/exception/exception.py
 tags: [eccezioni, zcs-exception, error-code]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: exc, resource: ../../app/src/zcs/core/exception/exception.py, title: "ZcsException", last_modified: 2025-10-15T08:50:58Z }
   - { id: logger, resource: ../../app/src/zcs/core/logger/logger.py, title: "Uso del codice di errore nel logger", last_modified: 2026-04-03T07:58:22Z }

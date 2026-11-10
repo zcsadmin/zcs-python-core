@@ -4,8 +4,9 @@ title: "Rilascio e prove in locale"
 description: "Come si pubblica zcs-python-core: workflow della PR e del tag, cosa non parte con un push su main, stato pre-release delle release lette, bug dell'identificativo, prove in locale."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/.github/workflows/publish-tag.yaml
 tags: [rilascio, workflow, artifact-registry, tag, test]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: publish, resource: ../../.github/workflows/publish-tag.yaml, title: "Pubblicazione sul tag", last_modified: 2026-07-23T09:21:16Z }
   - { id: pr, resource: ../../.github/workflows/pr_build-and-test.yaml, title: "Build e test sulle PR", last_modified: 2026-07-23T09:06:44Z }

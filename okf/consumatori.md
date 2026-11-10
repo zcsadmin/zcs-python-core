@@ -4,8 +4,9 @@ title: "Chi usa zcs-python-core"
 description: "Servizi e librerie che dipendono da zcs-python-core: versione richiesta su main, versione richiesta al tag in produzione, versione del servizio in app_versions e moduli importati."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/okf/consumatori.md
 tags: [consumatori, versioni, produzione, app-versions]
-status: draft
+status: stable
 generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
+verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
 sources:
   - { id: lettura, resource: "git grep su origin/main di tutte le repo di Follia_SW e git show dai tag, 2026-11-10", title: "Lettura delle dipendenze dei consumatori" }
   - { id: tfvars, resource: "app/follia.ai/terraform/terraform.tfvars di ml-follia-tesseract (origin/main 30bdc2f, file modificato il 2026-11-05)", title: "Mappa app_versions, letta il 2026-11-10" }
