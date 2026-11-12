@@ -4,9 +4,7 @@ title: "Sessione: RequestState e contesto della richiesta"
 description: "Classi e funzioni di zcs.core.session: RequestState, request_context, AuthInfo, QaInfo, FolliaModule, con campi, valori predefiniti e chi li imposta."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/session/request_state.py
 tags: [sessione, request-state, contextvar, auth-info]
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: state, resource: ../../app/src/zcs/core/session/request_state.py, title: "RequestState", last_modified: 2026-05-13T15:29:36Z }
   - { id: ctx, resource: ../../app/src/zcs/core/session/request_context.py, title: "request_context", last_modified: 2025-10-15T08:50:58Z }

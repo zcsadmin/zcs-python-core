@@ -4,9 +4,7 @@ title: "Comportamenti da conoscere"
 description: "Cosa succede davvero quando un servizio usa la libreria: contesto assente, effetti globali del logger, errori dei contatori, campi inviati a Loki, importazioni con effetti."
 resource: https://github.com/zcsadmin/zcs-python-core/tree/main/app/src/zcs/core
 tags: [comportamenti, logger, contatori, loki, contesto]
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: logger, resource: ../app/src/zcs/core/logger/logger.py, title: "Logger e formatter", last_modified: 2026-04-03T07:58:22Z }
   - { id: tel, resource: ../app/src/zcs/core/telemetry/zcs_telemetry.py, title: "ZcsTelemetry", last_modified: 2026-07-23T09:06:44Z }
