@@ -4,7 +4,8 @@
       "source": {
         "source": "github",
         "repo": "zcsadmin/ml-claude-marketplace"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "enabledPlugins": {
