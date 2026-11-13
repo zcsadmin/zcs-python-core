@@ -4,9 +4,7 @@ title: "Questioni aperte e limiti noti"
 description: "Problemi di sicurezza, dipendenze, contatori, rilascio e documenti superati di zcs-python-core, con priorità; incongruenze trovate durante la stesura."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/okf/questioni-aperte.md
 tags: [questioni-aperte, sicurezza, dipendenze, rilascio]
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: tlog, resource: ../app/src/zcs/core/telemetry/logging.py, title: "setup_logging e LokiContextFilter", last_modified: 2026-05-12T08:23:34Z }
   - { id: tel, resource: ../app/src/zcs/core/telemetry/zcs_telemetry.py, title: "ZcsTelemetry", last_modified: 2026-07-23T09:06:44Z }

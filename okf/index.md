@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # Bundle OKF di zcs-python-core
 
-Schede che descrivono la libreria Python `zcs-python-core` vista da chi la usa: cosa offre, come si comporta, chi la usa e come si rilascia. Le schede nascono `draft` e passano a `stable` con `verified` quando una persona le controlla; quelle di questo bundle sono state verificate il 10/11/2026.
+Schede che descrivono la libreria Python `zcs-python-core` vista da chi la usa: cosa offre, come si comporta, chi la usa e come si rilascia. Le schede sono scritte da un agente e controllate da chi porta la modifica su `main`: data e autore di ogni modifica stanno nella storia git (`git log -- okf/`).
 
 * [Panoramica della libreria](libreria.md) - cosa offre, installazione, dipendenze e dove guardare
 * [Comportamenti da conoscere](comportamenti.md) - contesto assente, effetti globali del logger, errori dei contatori, campi inviati a Loki

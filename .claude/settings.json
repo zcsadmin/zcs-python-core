@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "ml-claude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "zcsadmin/ml-claude-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "comune@ml-claude-marketplace": true
+  }
+}

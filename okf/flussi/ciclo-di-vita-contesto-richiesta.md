@@ -4,9 +4,7 @@ title: "Ciclo di vita del contesto della richiesta"
 description: "Come il contesto (RequestState in request_context) nasce, viene compilato e letto dal logger e dalla telemetria: cosa fa la libreria e cosa fa ogni servizio."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/session/request_context.py
 tags: [contesto, request-state, middleware, tracciamento]
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: ctx, resource: ../../app/src/zcs/core/session/request_context.py, title: "request_context", last_modified: 2025-10-15T08:50:58Z }
   - { id: state, resource: ../../app/src/zcs/core/session/request_state.py, title: "RequestState", last_modified: 2026-05-13T15:29:36Z }

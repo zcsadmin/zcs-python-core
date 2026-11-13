@@ -5,9 +5,7 @@ description: "Libreria Python di base per i servizi Follia: contesto della richi
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/README.md
 tags: [libreria, python, core, contesto-richiesta, logger, telemetria]
 esposizione: libreria
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: readme, resource: ../README.md, title: "README della repo", last_modified: 2025-06-27T08:46:03Z }
   - { id: pyproject, resource: ../app/pyproject.toml, title: "Metadati del pacchetto", last_modified: 2025-10-15T08:50:58Z }

@@ -4,9 +4,7 @@ title: "Telemetria: ZcsTelemetry, setup_logging, set_trace_attributes"
 description: "Cosa offre zcs.core.telemetry: inizializzazione con OTLP o Alloy, contatori, strumentazione FastAPI, log verso Loki e attributi delle tracce."
 resource: https://github.com/zcsadmin/zcs-python-core/blob/main/app/src/zcs/core/telemetry/zcs_telemetry.py
 tags: [telemetria, opentelemetry, prometheus, loki, alloy, grafana]
-status: stable
-generated: { by: claude-code/claude-sonnet-5-5, at: 2026-11-10T17:05:00Z }
-verified: { by: human:gferro, at: 2026-11-10T17:26:03Z }
+generated: { by: claude-code/claude-sonnet-5-5 }
 sources:
   - { id: tel, resource: ../../app/src/zcs/core/telemetry/zcs_telemetry.py, title: "ZcsTelemetry", last_modified: 2026-07-23T09:06:44Z }
   - { id: log, resource: ../../app/src/zcs/core/telemetry/logging.py, title: "setup_logging e LokiContextFilter", last_modified: 2026-05-12T08:23:34Z }
