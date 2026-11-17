@@ -10,5 +10,24 @@
   },
   "enabledPlugins": {
     "comune@ml-claude-marketplace": true
+  },
+  "permissions": {
+    "deny": [
+      "Bash(terraform apply:*)",
+      "Bash(terraform destroy:*)",
+      "Bash(*set_and_apply.sh*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin sandbox:*)",
+      "Bash(kubectl delete:*)",
+      "Bash(kubectl apply:*)",
+      "Bash(kubectl scale:*)",
+      "Bash(kubectl rollout restart:*)",
+      "Read(**/.env)",
+      "Read(**/*.env)",
+      "Read(**/*credentials*.json)"
+    ]
   }
 }
